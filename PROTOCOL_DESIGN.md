@@ -38,7 +38,13 @@ When interacting with the zkLlama app, the dApp will derive from the `v, t, r` v
 
 ### zkLlama Unlocked vault
 
-The unlocked vaults look exactly like the vault notes from the outside, and simply have their `v, t, r` values set up so, that all the amount `v` is already unlocked at the current block timestamp.
+Strictly speaking, the unlocked vaults are _NOT_ a new data type but a special case of the normal vault. They simply have their `v, t, r` values as such, that all the amount `v` is already unlocked at the current block timestamp.
+
+Essentially:
+
+```
+v <= calcUnlocked(t, r, block.timestamp)) // more "approved" tokens than actual amount of tokens in vault
+```
 
 One recommended use case of an unlocked vault is that when a depositor wants to set up streams for multiple accounts, and to shield away how the funds are distributed in different streams.
 
