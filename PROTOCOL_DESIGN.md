@@ -106,8 +106,8 @@ t1' = block.timestamp
 tRec = block.timestamp
 tSnd = block.timestamp
 
-av0 = calcUnlocked(v0, t0, r0, block.timestamp)
-av1 = calcUnlocked(v1, t1, r1, block.timestamp)
+av0 = calcUnlocked(t0, r0, block.timestamp)
+av1 = calcUnlocked(t1, r1, block.timestamp)
 assert av0 + av1 >= value
 
 (v0', r0') = calcNewConfig(v0, t0, r0, block.timestamp)
@@ -140,8 +140,8 @@ C(block.timestamp                           // public input of current time to c
     assert inputNote0 == Hash(pk, v0, t0, r0, n0)
     assert inputNote1 == Hash(pk, v1, t1, r1, n1)
 
-    var av0 = calcUnlocked(v0, t0, r0, block.timestamp)
-    var av1 = calcUnlocked(v1, t1, r1, block.timestamp)
+    var av0 = calcUnlocked(t0, r0, block.timestamp)
+    var av1 = calcUnlocked(t1, r1, block.timestamp)
     assert av0 + av1 >= value
 
     (v0', r0') = calcNewConfig(v0, t0, r0, block.timestamp)
