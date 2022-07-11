@@ -60,7 +60,7 @@ The snark computation of this will be like:
 
 ```
 C(publicNote, v,    // only publicNote and v are the public inputs
-  pk, v, t, r, n) { // private inputs
+  pk, t, r, n) { // private inputs
     vaultNote = (pk, v, t, r, n)
     assert publicNote == Hash(vaultNote)
     return 1
