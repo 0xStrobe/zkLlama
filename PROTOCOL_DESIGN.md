@@ -48,7 +48,7 @@ Another benefit of creating unlocked vaults could be that a user can consolidate
 
 ## Operations implementation
 
-### Setting up a stream (`Mint` transaction)
+### Setting up a stream (public `Mint` transaction)
 
 A depositor sets up a token streaming vault by minting a vault note on-chain.
 
@@ -83,7 +83,7 @@ function mint(proof, encryptedNote) {
 
 ### Interacting with a vault note (UTXO-like transaction)
 
-The vault notes can be interacted with like UTXOs. Common operations (set up new shielded vaults, consolidating vaults, ...) can be all easily constructed based on transferring the shielded tokens.
+The vault notes can be interacted with like UTXOs. Common operations (shielded mints, consolidating vaults, ...) can be all easily constructed based on transferring the shielded tokens.
 
 To transfer a particular value of tokens to a receiver (another pubkey owner), the current owner will select a sum of vault notes whose unlocked net values are at least the value that they want to transact with. The current owner can also set up an arbitrary streaming configuration for the new owner of the transferred tokens.
 
