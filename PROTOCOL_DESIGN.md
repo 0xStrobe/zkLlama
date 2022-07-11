@@ -6,7 +6,7 @@ Confidential token streaming vaults. Name is a place holder. :)
 
 ## How it works
 
-zkLlama Vault contracts allow users to anonymously lock funds for confidential token streaming, by minting UTXO-like secret vault notes that derive configs and state (e.g. amount of funds, expiration time, etc.) from an encrypted on-chain directory. A user will then be able to consolidate, transfer, or liquidate the notes with any accounts they have access to, as long as they can prove they are the owner of the vault note, thus breaking the connection of depositors, vault parameters, and fund recipients, achieving complete anonymity.
+zkLlama Vault contracts allow users to anonymously lock funds for confidential token streaming, by minting UTXO-like secret vault notes that derive configs and state (e.g. amount of funds, expiration time, etc.) from an encrypted on-chain dictionary. A user will then be able to consolidate, transfer, or liquidate the notes with any accounts they have access to, as long as they can prove they are the owner of the vault note, thus breaking the connection of depositors, vault parameters, and fund recipients, achieving complete anonymity.
 
 There will be a corresponding zkLlama Vault for each ERC20 asset.
 
@@ -14,7 +14,7 @@ There will be a corresponding zkLlama Vault for each ERC20 asset.
 
 A depositor `0xngmi` sets up a **12-month streaming** vault with a total of **$100,000.00 DAI** to **`0xstrobe`**. The only public info on-chain will be that `0xngmi` deposited $100,000.00 DAI to the `zkLlamaVault DAI` vault contract.
 
-The owner of `0xstrobe` may also have access to account `0xsifu`. As long as `0xsifu` can prove it has access to `0xstrobe`'s private key, it will be able to manage unlocked funds in the streaming vault on `0xstrobe`'s behalf, essentially breaking the connection of `0xstrobe` and `0xngmi`. (In the vanilla implementation described below, this private key is `0xstrobe`'s ETH wallet key, but it could be detached from any on-chain entity.)
+The owner of `0xstrobe` may also have access to account `0xsifu`. As long as `0xsifu` can prove it has access to `0xstrobe`'s private key, it will be able to manage unlocked funds in the streaming vault on `0xstrobe`'s behalf, essentially breaking the connection of `0xstrobe` and `0xngmi`. In the vanilla implementation described below, this private key is `0xstrobe`'s ETH wallet key, but it could be detached from any on-chain entity. If we use a keypair generated off-chain, this keypair will act as an _account_ within the shielded environment (of course the pubkey is never revealed either, it's always encoded in the hashes or ecrypted).
 
 `0xsifu` can transfer the unlocked funds to other accounts (pubkeys), or consolidate the unlocked balance of multiple vaults into a single vault, or liquidate any of their vaults and withdraw the unlocked DAI.
 
@@ -34,7 +34,7 @@ Let's call `Hash(vaultNote)` as the secret vault note. Since only the hashed sec
 
 The encrypted version of the note `E_pk(vaultNote)` is for the owner to identify that a particular note belongs to them. If the user doesn't have the pointers of all the notes that belongs to them, the dApp will scan the vault contract events (or the dictionary) for all notes and try to decrypt each one with the user's private key to list all the notes that belong to a particular user,. Successfully decrypted notes are the ones that belong to the user. (These notes will be cached in `localStorage` for faster future access.)
 
-When interacting with the zkLlama app, the dApp will derive from the `v, t, r` values of how much funds are unlocked/pending, or how much funds are still locked.
+When interacting with the zkLlama app, the dApp will derive from the `v, t, r` values of how much funds are unlocked, or how much funds are still pending.
 
 ### zkLlama Unlocked vault
 
